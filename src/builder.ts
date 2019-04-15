@@ -1,3 +1,4 @@
+import urljoin from 'url-join';
 import { Gravity, WatermarkPosition } from '.';
 import {
   FocusPoint,

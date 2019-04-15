@@ -1,15 +1,27 @@
+import { Gravity, WatermarkPosition } from '.';
 import {
-  ResizingType,
-  Gravity,
   FocusPoint,
-  RGBColor,
   HexColor,
-  WatermarkPosition,
+  ImgproxyConfig,
+  ResizingType,
+  RGBColor,
   WatermarkOffset,
 } from './types';
+import {
+  isFocusPoint,
+  isRGBColor,
+  isSecureConfig,
+  sign,
+  urlSafeEncode,
+} from './utils';
 
-export default class ImgproxyOptions {
-  private options: { [key: string]: string } = {};
+export class ImgproxyBuilder {
+  private config: ImgproxyConfig;
+  private options: { [key: string]: string | undefined } = {};
+
+  constructor(config: ImgproxyConfig) {
+    this.config = config;
+  }
 
   public resize(
     type?: ResizingType,
@@ -117,26 +129,40 @@ export default class ImgproxyOptions {
     return this;
   }
 
-  public extension(extension: string) {
-    this.setOption('f', extension);
-    return this;
-  }
-
-  public serialize() {
-    return Object.keys(this.options)
-      .map((option) => `${option}:${this.options[option]}`)
-      .join('/');
-  }
-
   public setOption(option: string, value: string) {
     this.options[option] = value;
   }
+
+  public clearOption(option: string) {
+    this.options[option] = undefined;
+  }
+
+  /**
+   * Generates a URL based on the set options.
+   *
+   * @param uri The uri of the image
+   * @param extension optional string to append as extension
+   */
+  public generateUrl(uri: string, extension?: string) {
+    const options = this.serializeOptions();
+    const config = this.config;
+
+    uri = config.encode !== false ? urlSafeEncode(uri) : uri;
+    uri = extension ? `${uri}.${extension}` : uri;
+    uri = `/${options}/${uri}`;
+
+    const signature = isSecureConfig(config)
+      ? sign(config.key, config.salt, uri)
+      : typeof config.insecure === 'string'
+      ? config.insecure
+      : 'insecure';
+    return urljoin(config.baseUrl, `${signature}${uri}`);
+  }
+
+  private serializeOptions() {
+    return Object.keys(this.options)
+      .filter((option) => !!this.options[option])
+      .map((option) => `${option}:${this.options[option]}`)
+      .join('/');
+  }
 }
-
-const isRGBColor = (obj: any): obj is RGBColor => {
-  return 'r' in obj && 'g' in obj && 'b' in obj;
-};
-
-const isFocusPoint = (obj: any): obj is FocusPoint => {
-  return 'x' in obj && 'y' in obj;
-};

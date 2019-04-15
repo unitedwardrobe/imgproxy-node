@@ -1,6 +1,6 @@
 {
   "name": "imgproxy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NodeJS client library to generate imgproxy urls",
   "main": "dist/index.js",
   "scripts": {

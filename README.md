@@ -6,7 +6,7 @@ A Node client library to generate urls for
 ## Usage
 
 ```ts
-import Imgproxy, { ImgproxyOptions, Gravity } from 'imgproxy';
+import Imgproxy, { Gravity } from 'imgproxy';
 
 const imgproxy = new Imgproxy({
   baseUrl: 'https://imgproxy.example.com',
@@ -15,13 +15,12 @@ const imgproxy = new Imgproxy({
   encode: true,
 });
 
-// ...
-
-const options = new ImgproxyOptions()
+imgproxy
+  .builder()
   .resize('fill', 300, 200, 0)
   .gravity(Gravity.north_east)
-  .dpr(2);
-imgproxy.generateUrl('https://example.com/path/to/image.jpg', options);
+  .dpr(2)
+  .generateUrl('https://example.com/path/to/image.jpg');
 ```
 
 ## Contributing

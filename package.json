@@ -6,6 +6,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc -d",
+    "prepublish": "npm run build",
     "lint": "tslint --project tsconfig.json src/**/*.ts",
     "prettier-check": "prettier -l 'src/**/*.ts' > /dev/null || echo 'Prettier violations found, please format code using Prettier'",
     "test": "npm run prettier-check && npm run lint"

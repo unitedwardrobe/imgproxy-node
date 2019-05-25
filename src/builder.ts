@@ -153,7 +153,7 @@ export class ImgproxyBuilder {
     uri = `/${options}/${uri}`;
 
     const signature = isSecureConfig(config)
-      ? sign(config.key, config.salt, uri)
+      ? sign(config.key, config.salt, uri, config.signatureSize || 32)
       : typeof config.insecure === 'string'
       ? config.insecure
       : 'insecure';

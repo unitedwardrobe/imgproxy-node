@@ -30,12 +30,12 @@ export class ImgproxyBuilder {
     height?: number,
     enlarge?: boolean
   ) {
-    this.setOption('rs', `${type}:${width}:${height}:${enlarge ? 1 : 0}`);
+    this.setOption('rs', [type, width, height, enlarge ? 1 : 0].join(':'));
     return this;
   }
 
   public size(width?: number, height?: number, enlarge?: boolean) {
-    this.setOption('s', `${width}:${height}:${enlarge ? 1 : 0}`);
+    this.setOption('s', [width, height, enlarge ? 1 : 0].join(':'));
     return this;
   }
 

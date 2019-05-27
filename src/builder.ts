@@ -147,10 +147,11 @@ export class ImgproxyBuilder {
   public generateUrl(uri: string, extension?: string) {
     const options = this.serializeOptions();
     const config = this.config;
+    const encode = config.encode !== false;
 
-    uri = config.encode !== false ? urlSafeEncode(uri) : uri;
-    uri = extension ? `${uri}.${extension}` : uri;
-    uri = `/${options}/${uri}`;
+    uri = encode ? urlSafeEncode(uri) : `plain/${uri}`;
+    uri = extension ? `${uri}${encode ? '.' : '@'}${extension}` : uri;
+    uri = `/${options ? `${options}/` : ''}${uri}`;
 
     const signature = isSecureConfig(config)
       ? sign(config.key, config.salt, uri, config.signatureSize || 32)

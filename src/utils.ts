@@ -2,11 +2,11 @@ import crypto from 'crypto';
 import { FocusPoint, ImgproxySecureConfig, RGBColor } from './types';
 
 export const isRGBColor = (obj: any): obj is RGBColor => {
-  return 'r' in obj && 'g' in obj && 'b' in obj;
+  return typeof obj === 'object' && 'r' in obj && 'g' in obj && 'b' in obj;
 };
 
 export const isFocusPoint = (obj: any): obj is FocusPoint => {
-  return 'x' in obj && 'y' in obj;
+  return typeof obj === 'object' && 'x' in obj && 'y' in obj;
 };
 
 export const isSecureConfig = (config: any): config is ImgproxySecureConfig => {

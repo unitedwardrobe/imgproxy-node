@@ -1,7 +1,6 @@
 import urljoin from 'url-join';
 import { Gravity, WatermarkPosition } from '.';
 import {
-  FocusPoint,
   HexColor,
   ImgproxyConfig,
   ResizingType,
@@ -10,6 +9,7 @@ import {
 } from './types';
 import {
   isFocusPoint,
+  isOffsetGravity,
   isRGBColor,
   isSecureConfig,
   sign,
@@ -66,9 +66,14 @@ export class ImgproxyBuilder {
     return this;
   }
 
-  public gravity(gravity: Gravity | FocusPoint) {
+  public gravity(gravity: Gravity) {
     if (isFocusPoint(gravity)) {
       this.setOption('g', `fp:${gravity.x}:${gravity.y}`);
+    } else if (isOffsetGravity(gravity)) {
+      this.setOption(
+        'g',
+        `${gravity.type}:${gravity.xOffset}:${gravity.yOffset}`
+      );
     } else {
       this.setOption('g', gravity);
     }
@@ -127,6 +132,21 @@ export class ImgproxyBuilder {
 
   public format(extension: string) {
     this.setOption('f', extension);
+    return this;
+  }
+
+  public crop(width: number, height: number, gravity?: Gravity) {
+    let crop = `${width}:${height}`;
+    if (gravity) {
+      if (isFocusPoint(gravity)) {
+        crop = `${crop}:fp:${gravity.x}:${gravity.y}`;
+      } else if (isOffsetGravity(gravity)) {
+        crop = `${crop}:${gravity.type}:${gravity.xOffset}:${gravity.yOffset}`;
+      } else {
+        crop = `${crop}:${gravity}`;
+      }
+    }
+    this.setOption('c', crop);
     return this;
   }
 

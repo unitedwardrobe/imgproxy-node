@@ -53,7 +53,13 @@ export interface FocusPoint {
   y: number;
 }
 
-export enum Gravity {
+export interface OffsetGravity {
+  type: GravityType;
+  xOffset: number;
+  yOffset: number;
+}
+
+export enum GravityType {
   center = 'ce', // default
   north = 'no', // (top edge);
   south = 'so', // (bottom edge);
@@ -65,6 +71,8 @@ export enum Gravity {
   south_west = 'sowe', // (bottom-left corner);
   smart = 'sm', // libvips detects the most "interesting" section of the image and considers it as the center of the resulting image;
 }
+
+export type Gravity = GravityType | FocusPoint | OffsetGravity;
 
 export enum WatermarkPosition {
   center = 'ce', // default

@@ -1,5 +1,10 @@
 import crypto from 'crypto';
-import { FocusPoint, ImgproxySecureConfig, RGBColor } from './types';
+import {
+  FocusPoint,
+  ImgproxySecureConfig,
+  OffsetGravity,
+  RGBColor,
+} from './types';
 
 export const isRGBColor = (obj: any): obj is RGBColor => {
   return typeof obj === 'object' && 'r' in obj && 'g' in obj && 'b' in obj;
@@ -7,6 +12,15 @@ export const isRGBColor = (obj: any): obj is RGBColor => {
 
 export const isFocusPoint = (obj: any): obj is FocusPoint => {
   return typeof obj === 'object' && 'x' in obj && 'y' in obj;
+};
+
+export const isOffsetGravity = (obj: any): obj is OffsetGravity => {
+  return (
+    typeof obj === 'object' &&
+    typeof obj.xOffset === 'number' &&
+    typeof obj.yOffset === 'number' &&
+    typeof obj.type === 'string'
+  );
 };
 
 export const isSecureConfig = (config: any): config is ImgproxySecureConfig => {

@@ -28,15 +28,15 @@
   },
   "homepage": "https://github.com/unitedwardrobe/imgproxy-node#readme",
   "devDependencies": {
-    "@types/node": "^10.12.18",
-    "@types/url-join": "^0.8.2",
-    "prettier": "^1.15.3",
-    "rimraf": "^2.6.2",
-    "tslint": "^5.17.0",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.2"
+    "@types/node": "^16.11.7",
+    "@types/url-join": "^4.0.1",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "url-join": "^4.0.0"
+    "url-join": "^4.0.1"
   }
 }

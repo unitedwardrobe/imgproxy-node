@@ -1,28 +1,10 @@
-import urljoin from 'url-join';
 import { Gravity, WatermarkPosition } from '.';
-import {
-  HexColor,
-  ImgproxyConfig,
-  ResizingType,
-  RGBColor,
-  WatermarkOffset,
-} from './types';
-import {
-  isFocusPoint,
-  isOffsetGravity,
-  isRGBColor,
-  isSecureConfig,
-  sign,
-  urlSafeEncode,
-} from './utils';
+import { BaseBuilder } from './base-builder';
+import { HexColor, ResizingType, RGBColor, WatermarkOffset } from './types';
+import { isFocusPoint, isOffsetGravity, isRGBColor } from './utils';
 
-export class ImgproxyBuilder {
-  private config: ImgproxyConfig;
+export class ImgproxyBuilder extends BaseBuilder {
   private options: { [key: string]: string | undefined } = {};
-
-  constructor(config: ImgproxyConfig) {
-    this.config = config;
-  }
 
   public resize(
     type?: ResizingType,
@@ -158,30 +140,7 @@ export class ImgproxyBuilder {
     this.options[option] = undefined;
   }
 
-  /**
-   * Generates a URL based on the set options.
-   *
-   * @param uri The uri of the image
-   * @param extension optional string to append as extension
-   */
-  public generateUrl(uri: string, extension?: string) {
-    const options = this.serializeOptions();
-    const config = this.config;
-    const encode = config.encode !== false;
-
-    uri = encode ? urlSafeEncode(uri) : `plain/${uri}`;
-    uri = extension ? `${uri}${encode ? '.' : '@'}${extension}` : uri;
-    uri = `/${options ? `${options}/` : ''}${uri}`;
-
-    const signature = isSecureConfig(config)
-      ? sign(config.key, config.salt, uri, config.signatureSize || 32)
-      : typeof config.insecure === 'string'
-      ? config.insecure
-      : 'insecure';
-    return urljoin(config.baseUrl, `${signature}${uri}`);
-  }
-
-  private serializeOptions() {
+  protected serializeOptions() {
     return Object.keys(this.options)
       .filter((option) => !!this.options[option])
       .map((option) => `${option}:${this.options[option]}`)

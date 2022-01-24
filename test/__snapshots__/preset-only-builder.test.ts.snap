@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`preset-only-builder should work when no presets are passed 1`] = `"https://example.com/pEvkDJzRVINGZbennLcmPMoNWObtxVBIWqUIErUOjbk/plain/https://example.com/image.jpg"`;
+
+exports[`preset-only-builder should work when presets are passed 1`] = `"https://example.com/vrZVbs-iwrOWgQ-zmliLuRKMpzyAKpo4mODQhIcJ_lQ/thumb_256:blur:center_crop/plain/https://example.com/image.jpg"`;

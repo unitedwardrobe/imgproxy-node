@@ -1,4 +1,5 @@
 import { ImgproxyBuilder } from './builder';
+import { ImgproxyPresetOnlyBuilder } from './preset-only-builder';
 import {
   Gravity,
   ImgproxyConfig,
@@ -23,6 +24,10 @@ export default class Imgproxy {
 
   public builder() {
     return new ImgproxyBuilder(this.config);
+  }
+
+  public presetOnlyBuilder() {
+    return new ImgproxyPresetOnlyBuilder(this.config);
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "imgproxy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "NodeJS client library to generate imgproxy urls",
   "main": "dist/index.js",
   "scripts": {
@@ -8,8 +8,9 @@
     "build": "tsc -d",
     "prepublish": "npm run build",
     "lint": "tslint --project tsconfig.json src/**/*.ts",
+    "prettier-fix": "prettier --write 'src/**/*.ts' && prettier --write 'test/**/*.ts'",
     "prettier-check": "prettier -l 'src/**/*.ts' > /dev/null || echo 'Prettier violations found, please format code using Prettier'",
-    "test": "npm run prettier-check && npm run lint"
+    "test": "npm run prettier-check && npm run lint && jest --runInBand"
   },
   "repository": {
     "type": "git",
@@ -28,10 +29,13 @@
   },
   "homepage": "https://github.com/unitedwardrobe/imgproxy-node#readme",
   "devDependencies": {
+    "@types/jest": "^27.4.0",
     "@types/node": "^16.11.7",
     "@types/url-join": "^4.0.1",
+    "jest": "^27.4.7",
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.1.3",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.4.4"

@@ -29,12 +29,15 @@ export const isSecureConfig = (config: any): config is ImgproxySecureConfig => {
 
 const hexDecode = (hex: string) => Buffer.from(hex, 'hex');
 
-export const urlSafeEncode = (data: any) =>
-  Buffer.from(data, 'utf8')
-    .toString('base64')
-    .replace(/=/g, '')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_');
+const encodeUrlChars = (url: string) =>
+  url.replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_');
+
+export const urlSafeEncode = (data: Buffer | string) => {
+  if (Buffer.isBuffer(data)) {
+    return encodeUrlChars(data.toString('base64'));
+  }
+  return encodeUrlChars(Buffer.from(data, 'utf-8').toString('base64'));
+};
 
 export const sign = (
   key: string,

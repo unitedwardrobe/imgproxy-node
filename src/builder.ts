@@ -134,10 +134,12 @@ export class ImgproxyBuilder extends BaseBuilder {
 
   public setOption(option: string, value: string) {
     this.options[option] = value;
+    return this;
   }
 
   public clearOption(option: string) {
     this.options[option] = undefined;
+    return this;
   }
 
   protected serializeOptions() {

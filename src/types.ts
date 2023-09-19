@@ -38,7 +38,7 @@ export type SignatureSize =
   | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24
   | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32;
 
-export type ResizingType = 'fit' | 'fill' | 'crop';
+export type ResizingType = 'fit' | 'fill' | 'fill-down' | 'force' | 'crop';
 
 export type HexColor = string;
 

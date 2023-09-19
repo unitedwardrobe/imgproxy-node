@@ -1,29 +1,34 @@
 import crypto from 'crypto';
 import {
   FocusPoint,
+  Gravity,
+  HexColor,
+  ImgproxyConfig,
   ImgproxySecureConfig,
   OffsetGravity,
   RGBColor,
 } from './types';
 
-export const isRGBColor = (obj: any): obj is RGBColor => {
+export const isRGBColor = (obj: RGBColor | HexColor): obj is RGBColor => {
   return typeof obj === 'object' && 'r' in obj && 'g' in obj && 'b' in obj;
 };
 
-export const isFocusPoint = (obj: any): obj is FocusPoint => {
+export const isFocusPoint = (obj: Gravity): obj is FocusPoint => {
   return typeof obj === 'object' && 'x' in obj && 'y' in obj;
 };
 
-export const isOffsetGravity = (obj: any): obj is OffsetGravity => {
+export const isOffsetGravity = (obj: Gravity): obj is OffsetGravity => {
   return (
     typeof obj === 'object' &&
-    typeof obj.xOffset === 'number' &&
-    typeof obj.yOffset === 'number' &&
-    typeof obj.type === 'string'
+    'xOffset' in obj &&
+    'yOffset' in obj &&
+    'type' in obj
   );
 };
 
-export const isSecureConfig = (config: any): config is ImgproxySecureConfig => {
+export const isSecureConfig = (
+  config: ImgproxyConfig | ImgproxySecureConfig
+): config is ImgproxySecureConfig => {
   return 'key' in config && 'salt' in config;
 };
 

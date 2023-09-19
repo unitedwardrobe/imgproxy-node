@@ -4,7 +4,8 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "outDir": "dist",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strict": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts"]
 }

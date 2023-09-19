@@ -1,4 +1,3 @@
-import urljoin from 'url-join';
 import { ImgproxyConfig } from './types';
 import { isSecureConfig, sign, urlSafeEncode } from './utils';
 
@@ -27,7 +26,9 @@ export abstract class BaseBuilder {
       : typeof config.insecure === 'string'
       ? config.insecure
       : 'insecure';
-    return urljoin(config.baseUrl, `${signature}${uri}`);
+
+    const url = new URL(`${signature}${uri}`, config.baseUrl);
+    return url.toString();
   }
 
   protected abstract serializeOptions(): string;

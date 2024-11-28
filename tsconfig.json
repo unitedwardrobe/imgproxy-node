@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "lib": ["esnext"],
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "outDir": "dist",

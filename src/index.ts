@@ -31,4 +31,4 @@ export default class Imgproxy {
   }
 }
 
-export { Gravity, WatermarkPosition };
+export { Gravity, WatermarkPosition, ImgproxyConfig, ImgproxySecureConfig };

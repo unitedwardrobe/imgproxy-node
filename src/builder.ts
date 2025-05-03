@@ -34,6 +34,15 @@ export class ImgproxyBuilder extends BaseBuilder {
     return this.setOption('h', `${height}`);
   }
 
+  public minWidth(width: number) {
+    return this.setOption('mw', `${width}`);
+  }
+
+  public minHeight(height: number) {
+    return this.setOption('mh', `${height}`);
+  }
+
+
   // allow for strings since javascript float precision sucks
   public dpr(dpr: number | string) {
     if ((dpr as number) > 0) {
@@ -103,6 +112,14 @@ export class ImgproxyBuilder extends BaseBuilder {
 
   public format(extension: string) {
     return this.setOption('f', extension);
+  }
+
+  public maxBytes(bytes: number) {
+    return this.setOption('mb', `${bytes}`);
+  }
+
+  public expires(timestamp: number) {
+    return this.setOption('exp', timestamp);
   }
 
   public crop(width: number, height: number, gravity?: Gravity) {

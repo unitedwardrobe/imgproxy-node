@@ -42,7 +42,6 @@ export class ImgproxyBuilder extends BaseBuilder {
     return this.setOption('mh', `${height}`);
   }
 
-
   // allow for strings since javascript float precision sucks
   public dpr(dpr: number | string) {
     if ((dpr as number) > 0) {
@@ -119,7 +118,7 @@ export class ImgproxyBuilder extends BaseBuilder {
   }
 
   public expires(timestamp: number) {
-    return this.setOption('exp', timestamp);
+    return this.setOption('exp', `${timestamp}`);
   }
 
   public crop(width: number, height: number, gravity?: Gravity) {

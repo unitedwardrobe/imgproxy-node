@@ -1,5 +1,8 @@
 # imgproxy
 
+> [!CAUTION]
+> This repository is not actively maintained anymore. PRs might not be reviewed. Forking is recommended.
+
 A Node client library to generate urls for
 [imgproxy](https://github.com/DarthSim/imgproxy) services.
 

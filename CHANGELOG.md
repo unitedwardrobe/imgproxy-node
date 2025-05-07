@@ -1,3 +1,9 @@
+# v1.4.1
+
+- Add a named export for `Imgproxy` in addition to `default`, so you can use it
+  like `import { Imgproxy } from "imgproxy";`. This is necessary if the tsconfig
+  is set to `"module": "Node16"`.
+
 # v1.3.1
 
 - Export all files from `dist/` in package.json

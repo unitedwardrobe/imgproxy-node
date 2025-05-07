@@ -4,6 +4,11 @@
   like `import { Imgproxy } from "imgproxy";`. This is necessary if the tsconfig
   is set to `"module": "Node16"`.
 
+# v1.4.0
+
+- Add `minWidth`, `minHeight`, `maxBytes`, and `expires` methods to
+  `ImgproxyBuilder`.
+
 # v1.3.1
 
 - Export all files from `dist/` in package.json
